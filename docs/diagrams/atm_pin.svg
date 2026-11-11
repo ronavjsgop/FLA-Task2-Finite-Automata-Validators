@@ -1,0 +1,49 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" width="850" height="240" viewBox="0 0 850 240">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#334155"/>
+    </marker>
+  </defs>
+
+  <rect width="850" height="240" fill="#f8fafc" rx="12"/>
+
+  <g stroke="#334155" stroke-width="2" fill="none" marker-end="url(#arrow)">
+    <path d="M45 110 L105 110"/>
+    <path d="M165 110 L245 110"/>
+    <path d="M305 110 L385 110"/>
+    <path d="M445 110 L525 110"/>
+    <path d="M585 110 L665 110"/>
+  </g>
+
+  <g fill="#dbeafe" stroke="#2563eb" stroke-width="2">
+    <circle cx="135" cy="110" r="30"/>
+    <circle cx="275" cy="110" r="30"/>
+    <circle cx="415" cy="110" r="30"/>
+    <circle cx="555" cy="110" r="30"/>
+  </g>
+
+  <circle cx="695" cy="110" r="30" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <circle cx="695" cy="110" r="24" fill="none" stroke="#16a34a" stroke-width="2"/>
+
+  <g font-family="Arial" font-size="17" font-weight="bold" text-anchor="middle" fill="#1e293b">
+    <text x="135" y="116">q0</text>
+    <text x="275" y="116">q1</text>
+    <text x="415" y="116">q2</text>
+    <text x="555" y="116">q3</text>
+    <text x="695" y="116">q4</text>
+  </g>
+
+  <g font-family="Arial" font-size="14" text-anchor="middle" fill="#475569">
+    <text x="205" y="90">Digit</text>
+    <text x="345" y="90">Digit</text>
+    <text x="485" y="90">Digit</text>
+    <text x="625" y="90">Digit</text>
+    <text x="135" y="165">0 digits</text>
+    <text x="275" y="165">1 digit</text>
+    <text x="415" y="165">2 digits</text>
+    <text x="555" y="165">3 digits</text>
+    <text x="695" y="165">4 digits</text>
+    <text x="415" y="210">Exactly four digits are accepted</text>
+  </g>
+</svg>

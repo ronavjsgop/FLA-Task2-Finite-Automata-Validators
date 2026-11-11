@@ -1,0 +1,226 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finite Automata Validators</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Finite Automata for Real-Time Validation</h1>
+        <p>Interactive DFA Validators</p>
+    </header>
+
+    <main>
+        <section class="intro">
+            <h2>Welcome</h2>
+            <p>
+                This project demonstrates how Finite Automata can be
+                used to validate passwords, email addresses and ATM PINs.
+            </p>
+        </section>
+
+        <section class="validator">
+            <h2>Password Verification</h2>
+            <p>Enter a password to check whether it satisfies the DFA rules.</p>
+            <input type="text" id="passwordInput" placeholder="Enter password">
+            <button onclick="validatePassword()">Validate Password</button>
+            <p id="passwordResult"></p>
+            <div id="passwordTrace"></div>
+        </section>
+
+        <section class="validator">
+            <h2>Email Format Validator</h2>
+            <p>Enter an email address to check its format.</p>
+            <input type="text" id="emailInput" placeholder="Enter email">
+            <button onclick="validateEmail()">Validate Email</button>
+            <p id="emailResult"></p>
+            <div id="emailTrace"></div>
+        </section>
+
+        <section class="validator">
+            <h2>ATM PIN Verification</h2>
+            <p>Enter a four-digit ATM PIN.</p>
+            <input type="password" id="pinInput" placeholder="Enter 4-digit PIN" maxlength="4">
+            <button onclick="validatePIN()">Validate PIN</button>
+            <p id="pinResult"></p>
+            <div id="pinTrace"></div>
+        </section>
+        <section class="validator">
+    <h2>Password DFA State Diagram</h2>
+    <img src="diagrams/password.svg" alt="Password DFA Diagram" width="100%">
+</section>
+
+<h3>Password DFA Transition Table</h3>
+
+<table>
+    <tr>
+        <th>Current State</th>
+        <th>Input Category</th>
+        <th>Next State</th>
+    </tr>
+    <tr><td>q0</td><td>Uppercase</td><td>q1</td></tr>
+    <tr><td>q0</td><td>Lowercase</td><td>q2</td></tr>
+    <tr><td>q0</td><td>Digit</td><td>q4</td></tr>
+    <tr><td>q0</td><td>Special Character</td><td>q8</td></tr>
+    <tr><td>Any state</td><td>New category</td><td>Updated mask state</td></tr>
+    <tr><td>Any state</td><td>Space</td><td>DEAD</td></tr>
+</table>
+
+<p><strong>Start State:</strong> q0</p>
+<p><strong>Accepting State:</strong> q15 (all four categories found)</p>
+<p><strong>Alphabet:</strong> Uppercase, lowercase, digits and special characters (excluding spaces)</p>
+<p><strong>Length:</strong> 8–16 characters</p>
+
+
+         <section class="validator">
+            <h2>Email DFA State Diagram</h2>
+            <img src="diagrams/email.svg" alt="Email DFA Diagram" width="100%">
+        </section>
+
+        <section class="validator">
+            <h2>ATM PIN DFA State Diagram</h2>
+            <img src="diagrams/atm_pin.svg" alt="ATM PIN DFA Diagram" width="100%">
+        </section>
+        
+<h3>ATM PIN DFA Transition Table</h3>
+
+<table>
+    <tr>
+        <th>Current State</th>
+        <th>Input</th>
+        <th>Next State</th>
+    </tr>
+    <tr><td>q0</td><td>Digit (0–9)</td><td>q1</td></tr>
+    <tr><td>q1</td><td>Digit (0–9)</td><td>q2</td></tr>
+    <tr><td>q2</td><td>Digit (0–9)</td><td>q3</td></tr>
+    <tr><td>q3</td><td>Digit (0–9)</td><td>q4</td></tr>
+    <tr><td>q4</td><td>Any extra digit</td><td>DEAD</td></tr>
+    <tr><td>Any state</td><td>Non-digit</td><td>DEAD</td></tr>
+</table>
+
+<p><strong>Start State:</strong> q0</p>
+<p><strong>Final State:</strong> q4</p>
+<p><strong>Alphabet:</strong> {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}</p>
+
+
+    </main>
+    
+<section class="validator">
+    <h2>Test Cases and Results</h2>
+
+    <h3>1. Password Verification</h3>
+    <table>
+        <tr>
+            <th>Input</th>
+            <th>Expected Result</th>
+        </tr>
+        <tr><td>Hello@123</td><td>Accepted</td></tr>
+        <tr><td>Welcome@1</td><td>Accepted</td></tr>
+        <tr><td>Abcdef@12</td><td>Accepted</td></tr>
+        <tr><td>Test@1234</td><td>Accepted</td></tr>
+        <tr><td>Pass@word9</td><td>Accepted</td></tr>
+        <tr><td>hello123</td><td>Rejected</td></tr>
+        <tr><td>HELLO@123</td><td>Rejected</td></tr>
+        <tr><td>HelloWorld</td><td>Rejected</td></tr>
+        <tr><td>Hi@1</td><td>Rejected</td></tr>
+        <tr><td>Hello 123@A</td><td>Rejected</td></tr>
+    </table>
+
+    <h3>2. Email Format Validator</h3>
+    <table>
+        <tr>
+            <th>Input</th>
+            <th>Expected Result</th>
+        </tr>
+        <tr><td>student@gmail.com</td><td>Accepted</td></tr>
+        <tr><td>abc@yahoo.in</td><td>Accepted</td></tr>
+        <tr><td>user123@outlook.com</td><td>Accepted</td></tr>
+        <tr><td>john.doe@gmail.com</td><td>Accepted</td></tr>
+        <tr><td>hello_123@gmail.com</td><td>Accepted</td></tr>
+        <tr><td>@gmail.com</td><td>Rejected</td></tr>
+        <tr><td>abc@gmail</td><td>Rejected</td></tr>
+        <tr><td>abc@gmail.</td><td>Rejected</td></tr>
+        <tr><td>abc@@gmail.com</td><td>Rejected</td></tr>
+        <tr><td>abc gmail@gmail.com</td><td>Rejected</td></tr>
+    </table>
+
+    <h3>3. ATM PIN Verification</h3>
+    <table>
+        <tr>
+            <th>Input</th>
+            <th>Expected Result</th>
+        </tr>
+        <tr><td>1234</td><td>Accepted</td></tr>
+        <tr><td>5678</td><td>Accepted</td></tr>
+        <tr><td>0000</td><td>Accepted</td></tr>
+        <tr><td>9876</td><td>Accepted</td></tr>
+        <tr><td>2468</td><td>Accepted</td></tr>
+        <tr><td>123</td><td>Rejected</td></tr>
+        <tr><td>12345</td><td>Rejected</td></tr>
+        <tr><td>12ab</td><td>Rejected</td></tr>
+        <tr><td>abcd</td><td>Rejected</td></tr>
+        <tr><td>12 4</td><td>Rejected</td></tr>
+    </table>
+</section>
+   
+<section class="validator">
+    <h2>Working Principle of Finite Automata</h2>
+
+    <p>
+        A Finite Automaton is a mathematical model used to recognize
+        patterns in input strings. It consists of states, an alphabet,
+        transition functions, a start state and final states.
+    </p>
+
+    <h3>1. Password Verification</h3>
+    <p>
+        The password validator checks whether the password contains
+        at least one uppercase letter, one lowercase letter, one digit
+        and one special character. The password length must be between
+        8 and 16 characters, and spaces are not allowed.
+    </p>
+
+    <h3>2. Email Format Validation</h3>
+    <p>
+        The email validator checks a practical email format consisting
+        of a local part, an @ symbol, a domain name and a final extension
+        containing at least two letters.
+    </p>
+
+    <h3>3. ATM PIN Verification</h3>
+    <p>
+        The ATM PIN validator accepts exactly four numeric digits.
+        Each digit moves the automaton to its next state. After four
+        digits, the automaton reaches its accepting state.
+    </p>
+
+    <h2>Limitations of Finite Automata</h2>
+    <ul>
+        <li>Finite automata have a limited number of states.</li>
+        <li>They cannot remember unlimited amounts of information.</li>
+        <li>They cannot validate every possible real-world email rule.</li>
+        <li>Password validation checks format, not password strength against attacks.</li>
+        <li>ATM PIN validation checks the number format, not the actual PIN stored by a bank.</li>
+    </ul>
+
+    <h2>Conclusion</h2>
+    <p>
+        This project demonstrates how finite automata can be applied
+        to practical input validation problems. DFA-based validators
+        provide a systematic way to accept valid strings and reject
+        invalid strings based on predefined rules.
+    </p>
+</section>
+
+
+    <footer>
+        <p>Formal Languages and Automata Theory - Task 2</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
